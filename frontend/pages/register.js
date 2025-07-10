@@ -8,7 +8,7 @@ import Navbar from '../components/Navbar';
 import Image from 'next/image';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { motion } from 'framer-motion';
-import Link from 'next/link';  // ✅ Importado para navegación correcta
+import Link from 'next/link';
 
 export default function Register() {
   const router = useRouter();
@@ -35,7 +35,7 @@ export default function Register() {
       setPhraseIndex(prev => (prev + 1) % phrases.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [phrases.length]);  // ✅ Corregido: dependencia agregada
+  }, [phrases.length]);
 
   const validatePassword = (pwd) => {
     const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
@@ -76,6 +76,7 @@ export default function Register() {
       await sendEmailVerification(user);
       router.push('/verify-email');
     } catch (err) {
+      console.error(err);
       setError('Firebase: ' + err.message);
     } finally {
       setLoading(false);
@@ -98,6 +99,7 @@ export default function Register() {
       await sendEmailVerification(result.user);
       router.push('/verify-email');
     } catch (err) {
+      console.error(err);
       setError('Firebase: ' + err.message);
     }
   };

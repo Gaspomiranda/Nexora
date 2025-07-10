@@ -23,7 +23,7 @@ export default function ChatIA() {
       const data = await res.json();
       setResponse(data.result || 'Lo siento, no pude generar una respuesta.');
     } catch (error) {
-      console.error('⚠️ Error al conectar con la IA. Intentá de nuevo.', error);
+      console.error('⚠️ Error al conectar con la IA:', error); // ✅ Ahora sí usamos 'error'
       setResponse('⚠️ Error al conectar con la IA. Intentá de nuevo.');
     } finally {
       setLoading(false);

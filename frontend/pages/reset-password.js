@@ -22,8 +22,8 @@ export default function ResetPassword() {
     try {
       await sendPasswordResetEmail(auth, email);
       setMessage('Te enviamos un correo para restablecer tu contraseña.');
-    } catch (error) {  // ✅ corregido: uso la misma variable
-      console.error('Error al enviar email:', error);
+    } catch (error) {  // ✅ La variable usada correctamente
+      console.error('Error al enviar email:', error);  // ✅ Variable usada
       setError('No pudimos enviar el correo. Verificá la dirección e intentá de nuevo.');
     } finally {
       setLoading(false);
@@ -57,7 +57,9 @@ export default function ResetPassword() {
               🔑 Restablecer contraseña
             </motion.h1>
 
-            <p style={styles.text}>Ingresá tu correo electrónico y te enviaremos un enlace para cambiar tu contraseña.</p>
+            <p style={styles.text}>
+              Ingresá tu correo electrónico y te enviaremos un enlace para cambiar tu contraseña.
+            </p>
 
             <form onSubmit={handleReset} style={styles.form}>
               <input
@@ -143,7 +145,7 @@ const styles = {
     fontSize: '1rem',
     borderRadius: '8px',
     border: '1px solid #cbd5e1',
-    width: '100%',  // ✅ corregido: ancho correcto
+    width: '100%',
   },
   button: {
     padding: '1rem 2rem',

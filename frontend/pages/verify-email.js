@@ -14,7 +14,7 @@ export default function VerifyEmail() {
   const router = useRouter();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
         if (currentUser.emailVerified) {
@@ -48,8 +48,8 @@ export default function VerifyEmail() {
     try {
       await sendEmailVerification(user);
       setMessage('Correo de verificación reenviado correctamente.');
-    } catch (err) {
-      console.error('Error al reenviar:', err);  // ✅ Agregado
+    } catch (error) {
+      console.error('Error al reenviar:', error);
       setError('Error al reenviar el correo. Intentá de nuevo.');
     } finally {
       setResending(false);

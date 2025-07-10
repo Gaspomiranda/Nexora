@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
-import Link from 'next/link';  // ✅ Importar Link
+import Link from 'next/link';
 
 export default function VerifyEmailSuccess() {
   return (
@@ -16,8 +16,6 @@ export default function VerifyEmailSuccess() {
         minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
         fontFamily: 'Inter, sans-serif',
         color: '#fff'
       }}>
@@ -29,8 +27,7 @@ export default function VerifyEmailSuccess() {
             Tu cuenta en <strong>Nexora</strong> está activada. Ahora podés comenzar a usar la plataforma.
           </p>
 
-          {/* ✅ Cambiado por Link */}
-          <Link href="/" legacyBehavior>
+          <Link href="/" passHref legacyBehavior>
             <a
               style={{
                 padding: '12px 24px',
@@ -44,7 +41,6 @@ export default function VerifyEmailSuccess() {
               Ir al inicio
             </a>
           </Link>
-
         </main>
       </div>
     </>

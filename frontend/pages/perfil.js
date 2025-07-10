@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db } from '../lib/firebase';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
@@ -15,7 +14,7 @@ export default function Perfil() {
   const [success, setSuccess] = useState('');
   const [error, setError] = useState('');
   const [saving, setSaving] = useState(false);
-  const router = useRouter();
+  // ✅ Eliminado: const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +30,7 @@ export default function Perfil() {
             setProvider(user.providerData[0]?.providerId === 'google.com' ? 'Google' : 'Email/Contraseña');
           }
         } catch (err) {
-          console.error('Error al obtener perfil:', err);
+          console.error('Error al obtener perfil:', err);  // ✅ Obligatorio para ESLint
           setError('Error al cargar los datos del perfil.');
         }
       }
@@ -51,7 +50,7 @@ export default function Perfil() {
       await updateDoc(userRef, { nombre });
       setSuccess('✅ Nombre actualizado correctamente');
     } catch (err) {
-      console.error(err);
+      console.error(err);  // ✅ Obligatorio para ESLint
       setError('❌ Error al actualizar el nombre');
     } finally {
       setSaving(false);

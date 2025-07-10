@@ -2,14 +2,11 @@ import React from 'react';
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router'; // ✅ Importación necesaria
+
 import { Bot, Zap, BookOpen, DollarSign, History, User, Layers, HelpCircle } from 'lucide-react';
-// ❌ BORRAR ESTA LINEA porque no se usa
-// import { useRouter } from 'next/router';
 
 export default function EduWealth() {
-  // ❌ BORRAR ESTA LINEA porque no se usa
-  // const router = useRouter();
-
   const cards = [
     { icon: <Bot size={40} />, title: 'Chat IA', text: 'Hacé tus preguntas y recibí respuestas instantáneas.', link: '/chat-ia' },
     { icon: <Zap size={40} />, title: 'Planes', text: 'Desbloqueá beneficios exclusivos.', link: '' },
@@ -69,7 +66,7 @@ export default function EduWealth() {
 }
 
 function Card({ icon, title, text, link }) {
-  const router = useRouter();
+  const router = useRouter(); // ✅ Import y uso correcto
 
   const handleClick = () => {
     if (link) {
