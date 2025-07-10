@@ -1,7 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
-import '../styles/globals.css';
+
 
 export default function PrivacyPolicy() {
   return (
