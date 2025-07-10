@@ -20,10 +20,11 @@ export default function ChatIA() {
       });
       const data = await res.json();
       setResponse(data.result);
-    }catch (error) {
-  console.error('Error al generar respuesta:', error);
-  setResponse('Error al generar respuesta.');
-}
+    } catch (error) {
+      console.error('Error al generar respuesta:', error);
+      setResponse('Error al generar respuesta.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -61,7 +62,7 @@ export default function ChatIA() {
       )}
     </div>
   );
-
+}
 
 const styles = {
   card: {

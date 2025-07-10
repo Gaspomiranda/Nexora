@@ -34,7 +34,7 @@ export default function Login() {
       setPhraseIndex((prev) => (prev + 1) % phrases.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [phrases.length]); // ✅ Agregado para corregir el warning
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -60,6 +60,7 @@ export default function Login() {
       await signInWithEmailAndPassword(auth, email, password);
       router.push('/');
     } catch (err) {
+      console.error(err); // ✅ Agregado para evitar error ESLint
       setError('Correo o contraseña inválidos');
       setLoginAttempts(prev => prev + 1);
     } finally {
@@ -77,6 +78,7 @@ export default function Login() {
       await signInWithGoogle();
       router.push('/');
     } catch (err) {
+      console.error(err); // ✅ Agregado para evitar error ESLint
       setError('Error al iniciar sesión con Google');
     }
   };
@@ -130,13 +132,14 @@ export default function Login() {
                     required
                     style={{ ...styles.input, paddingRight: '2.5rem' }}
                   />
-                  <span onClick={() => 
-              setShowPassword(!showPassword)} 
-              style={styles.eyelcon}>
-                 {showPassword ? '👀' : '🤫'}
-                </span>
-               </div>
-             </div>
+                  <span
+                    onClick={() => setShowPassword(!showPassword)}
+                    style={styles.eyeIcon}
+                  >
+                    {showPassword ? '👀' : '🤫'}
+                  </span>
+                </div>
+              </div>
 
               <div style={{ margin: '1rem 0' }}>
                 <ReCAPTCHA
@@ -170,11 +173,15 @@ export default function Login() {
               </motion.button>
             </div>
 
-            <p style={styles.forgot} onClick={() => router.push('/reset-password')}>¿Olvidaste tu contraseña?</p>
+            <p style={styles.forgot} onClick={() => router.push('/reset-password')}>
+              ¿Olvidaste tu contraseña?
+            </p>
 
             <p style={styles.linkText}>
               ¿No tenés una cuenta?{' '}
-              <span style={styles.link} onClick={() => router.push('/register')}>Registrate</span>
+              <span style={styles.link} onClick={() => router.push('/register')}>
+                Registrate
+              </span>
             </p>
           </motion.div>
         </main>

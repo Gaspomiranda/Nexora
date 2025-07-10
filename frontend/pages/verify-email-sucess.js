@@ -1,7 +1,6 @@
-// ✅ pages/verify-email-success.js - Nexora actualizado
-
 import Head from 'next/head';
 import Navbar from '../components/Navbar';
+import Link from 'next/link';  // ✅ Importar Link
 
 export default function VerifyEmailSuccess() {
   return (
@@ -29,19 +28,23 @@ export default function VerifyEmailSuccess() {
           <p style={{ fontSize: '1rem', marginBottom: '2rem', color: '#cbd5e1' }}>
             Tu cuenta en <strong>Nexora</strong> está activada. Ahora podés comenzar a usar la plataforma.
           </p>
-          <a
-            href="/"
-            style={{
-              padding: '12px 24px',
-              backgroundColor: '#16a34a',
-              color: '#fff',
-              borderRadius: '10px',
-              textDecoration: 'none',
-              fontWeight: 'bold'
-            }}
-          >
-            Ir al inicio
-          </a>
+
+          {/* ✅ Cambiado por Link */}
+          <Link href="/" legacyBehavior>
+            <a
+              style={{
+                padding: '12px 24px',
+                backgroundColor: '#16a34a',
+                color: '#fff',
+                borderRadius: '10px',
+                textDecoration: 'none',
+                fontWeight: 'bold'
+              }}
+            >
+              Ir al inicio
+            </a>
+          </Link>
+
         </main>
       </div>
     </>

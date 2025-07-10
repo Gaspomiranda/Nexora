@@ -22,7 +22,8 @@ export default function ResetPassword() {
     try {
       await sendPasswordResetEmail(auth, email);
       setMessage('Te enviamos un correo para restablecer tu contraseña.');
-    } catch (err) {
+    } catch (error) {  // ✅ corregido: uso la misma variable
+      console.error('Error al enviar email:', error);
       setError('No pudimos enviar el correo. Verificá la dirección e intentá de nuevo.');
     } finally {
       setLoading(false);
@@ -142,7 +143,7 @@ const styles = {
     fontSize: '1rem',
     borderRadius: '8px',
     border: '1px solid #cbd5e1',
-    width: '93,6%',
+    width: '100%',  // ✅ corregido: ancho correcto
   },
   button: {
     padding: '1rem 2rem',

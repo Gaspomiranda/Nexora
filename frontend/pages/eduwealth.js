@@ -3,10 +3,12 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
 import { Bot, Zap, BookOpen, DollarSign, History, User, Layers, HelpCircle } from 'lucide-react';
-import { useRouter } from 'next/router';
+// ❌ BORRAR ESTA LINEA porque no se usa
+// import { useRouter } from 'next/router';
 
 export default function EduWealth() {
-  const router = useRouter();
+  // ❌ BORRAR ESTA LINEA porque no se usa
+  // const router = useRouter();
 
   const cards = [
     { icon: <Bot size={40} />, title: 'Chat IA', text: 'Hacé tus preguntas y recibí respuestas instantáneas.', link: '/chat-ia' },

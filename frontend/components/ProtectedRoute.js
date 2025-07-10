@@ -14,10 +14,10 @@ export default function ProtectedRoute({ children }) {
     if (!loading && !user && !publicRoutes.includes(router.pathname)) {
       router.push('/login');
     }
-  }, [user, loading, router.pathname]);
+  }, [user, loading, router]);  // ✅ Agregué "router" en lugar de solo "router.pathname"
 
   if (loading) {
-    return <p style={{ textAlign: 'center', marginTop: '3rem' }}>Cargando...</p>;
+    return <p style={{ textAlign: 'center', marginTop: '3rem', color: '#fff' }}>Cargando...</p>;
   }
 
   return <>{children}</>;

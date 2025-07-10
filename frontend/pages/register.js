@@ -1,5 +1,3 @@
-// ✅ pages/register.js - Nexora completo con verificación real de correo
-
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -10,6 +8,7 @@ import Navbar from '../components/Navbar';
 import Image from 'next/image';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { motion } from 'framer-motion';
+import Link from 'next/link';  // ✅ Importado para navegación correcta
 
 export default function Register() {
   const router = useRouter();
@@ -36,7 +35,7 @@ export default function Register() {
       setPhraseIndex(prev => (prev + 1) % phrases.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, []);
+  }, [phrases.length]);  // ✅ Corregido: dependencia agregada
 
   const validatePassword = (pwd) => {
     const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
@@ -75,9 +74,7 @@ export default function Register() {
       });
 
       await sendEmailVerification(user);
-
       router.push('/verify-email');
-
     } catch (err) {
       setError('Firebase: ' + err.message);
     } finally {
@@ -137,7 +134,9 @@ export default function Register() {
 
               <label style={{ fontSize: '0.9rem', textAlign: 'left', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                 <input type="checkbox" checked={acceptedTerms} onChange={() => setAcceptedTerms(!acceptedTerms)} required />
-                <span>Acepto los <a href="/terms" style={{ color: '#3b82f6', textDecoration: 'underline' }}>Términos de uso</a> y la <a href="/privacy" style={{ color: '#3b82f6', textDecoration: 'underline' }}>Política de privacidad</a></span>
+                <span>
+                  Acepto los <Link href="/terms" style={{ color: '#3b82f6', textDecoration: 'underline' }}>Términos de uso</Link> y la <Link href="/privacy" style={{ color: '#3b82f6', textDecoration: 'underline' }}>Política de privacidad</Link>
+                </span>
               </label>
 
               <div style={{ margin: '1rem 0' }}>
@@ -155,7 +154,9 @@ export default function Register() {
                 <span style={{ marginLeft: '0.5rem' }}>Continuar con Google</span>
               </motion.button>
 
-              <p style={{ marginTop: '2rem', fontSize: '1rem', color: '#fff' }}>¿Ya tenés cuenta? <a href="/login" style={{ color: '#3b82f6', textDecoration: 'underline' }}>Iniciá sesión</a></p>
+              <p style={{ marginTop: '2rem', fontSize: '1rem', color: '#fff' }}>
+                ¿Ya tenés cuenta? <Link href="/login" style={{ color: '#3b82f6', textDecoration: 'underline' }}>Iniciá sesión</Link>
+              </p>
             </form>
 
           </motion.div>
@@ -164,105 +165,3 @@ export default function Register() {
     </>
   );
 }
-
-const styles = {
-  pageContainer: {
-    background: 'linear-gradient(to bottom, #0f172a 0%, #1e293b 100%)',
-    minHeight: '100vh',
-    display: 'flex',
-    flexDirection: 'column',
-    fontFamily: 'Inter, sans-serif',
-    color: '#fff',
-  },
-  main: {
-    flex: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: '4rem 1rem',
-    width: '100%',
-    minHeight: '100vh',
-  },
-  leftSide: {
-    maxWidth: '650px',
-    width: '100%',
-    backgroundColor: 'rgba(30, 41, 59, 0.95)',
-    padding: '4rem 3rem',
-    borderRadius: '16px',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
-    textAlign: 'center',
-  },
-  phrase: {
-    fontSize: '1.1rem',
-    color: '#fff',
-    fontWeight: 700,
-    marginBottom: '1.8rem',
-    minHeight: '1.8rem',
-  },
-  heading: {
-    fontSize: '2.7rem',
-    marginBottom: '2.2rem',
-    color: '#fff',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '1.5rem',
-  },
-  input: {
-    padding: '1rem',
-    fontSize: '1rem',
-    borderRadius: '8px',
-    border: '1px solid #cbd5e1',
-    width: '100%',
-  },
-  eyeIcon: {
-    position: 'absolute',
-    right: '12px',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    cursor: 'pointer',
-    fontSize: '1rem',
-  },
-  checkboxContainer: {
-    fontSize: '0.9rem',
-    textAlign: 'left',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-  },
-  button: {
-    padding: '1rem 2rem',
-    backgroundColor: '#16a34a',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '10px',
-    fontSize: '1rem',
-    cursor: 'pointer',
-    transition: 'all 0.3s ease',
-  },
-  googleButton: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    border: 'none',
-    borderRadius: '10px',
-    padding: '1rem 1.8rem',
-    cursor: 'pointer',
-  },
-  error: {
-    color: '#f87171',
-    fontSize: '0.95rem',
-  },
-  linkText: {
-    marginTop: '2rem',
-    fontSize: '1rem',
-    color: '#fff',
-  },
-  link: {
-    color: '#3b82f6',
-    textDecoration: 'underline',
-    cursor: 'pointer',
-  },
-};

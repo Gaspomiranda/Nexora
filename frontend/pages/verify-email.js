@@ -10,7 +10,6 @@ export default function VerifyEmail() {
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-  const [isVerified, setIsVerified] = useState(false);
   const [resending, setResending] = useState(false);
   const router = useRouter();
 
@@ -18,8 +17,6 @@ export default function VerifyEmail() {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-        setIsVerified(currentUser.emailVerified);
-
         if (currentUser.emailVerified) {
           router.push('/dashboard');
         }
@@ -31,11 +28,10 @@ export default function VerifyEmail() {
     const interval = setInterval(() => {
       auth.currentUser?.reload().then(() => {
         if (auth.currentUser?.emailVerified) {
-          setIsVerified(true);
           router.push('/dashboard');
         }
       });
-    }, 3000); // Chequea cada 3 segundos
+    }, 3000);
 
     return () => {
       unsubscribe();
@@ -53,6 +49,7 @@ export default function VerifyEmail() {
       await sendEmailVerification(user);
       setMessage('Correo de verificación reenviado correctamente.');
     } catch (err) {
+      console.error('Error al reenviar:', err);  // ✅ Agregado
       setError('Error al reenviar el correo. Intentá de nuevo.');
     } finally {
       setResending(false);

@@ -48,9 +48,7 @@ export default function Perfil() {
 
     try {
       const userRef = doc(db, 'usuarios', user.uid);
-      await updateDoc(userRef, {
-        nombre,
-      });
+      await updateDoc(userRef, { nombre });
       setSuccess('✅ Nombre actualizado correctamente');
     } catch (err) {
       console.error(err);
@@ -64,16 +62,15 @@ export default function Perfil() {
     <ProtectedRoute>
       <Head>
         <title>Editar Perfil | EduWealth</title>
-        
       </Head>
 
       <Navbar />
 
-      <div styles={styles.container}>
-        <h1 styles={styles.title}>📝 Editar Perfil</h1>
-        <p styles={styles.subtitle}>Modificá tus datos personales</p>
+      <div style={styles.container}>
+        <h1 style={styles.title}>📝 Editar Perfil</h1>
+        <p style={styles.subtitle}>Modificá tus datos personales</p>
 
-        <form onSubmit={handleSave} styles={styles.form}>
+        <form onSubmit={handleSave} style={styles.form}>
           <label>Nombre completo</label>
           <input
             type="text"
@@ -88,7 +85,7 @@ export default function Perfil() {
             type="email"
             value={email}
             disabled
-            styles={{ ...styles.input, backgroundColor: '#f1f5f9', color: '#64748b' }}
+            style={{ ...styles.input, backgroundColor: '#f1f5f9', color: '#64748b' }}
           />
 
           <label>Método de acceso</label>
@@ -96,13 +93,17 @@ export default function Perfil() {
             type="text"
             value={provider}
             disabled
-            styles={{ ...styles.input, backgroundColor: '#f1f5f9', color: '#64748b' }}
+            style={{ ...styles.input, backgroundColor: '#f1f5f9', color: '#64748b' }}
           />
 
-          {error && <p styles={styles.error}>{error}</p>}
-          {success && <p styles={styles.success}>{success}</p>}
+          {error && <p style={styles.error}>{error}</p>}
+          {success && <p style={styles.success}>{success}</p>}
 
-          <button type="submit" styles={{ ...styles.button, opacity: saving ? 0.6 : 1 }} disabled={saving}>
+          <button
+            type="submit"
+            style={{ ...styles.button, opacity: saving ? 0.6 : 1 }}
+            disabled={saving}
+          >
             {saving ? 'Guardando...' : 'Guardar cambios'}
           </button>
         </form>
