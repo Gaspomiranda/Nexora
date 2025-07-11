@@ -3,9 +3,12 @@ import Head from 'next/head';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../lib/firebase';   // 👉 Este es el import que faltaba
 
 export default function Home() {
   const router = useRouter();
+  const [user, loading] = useAuthState(auth);  // 👉 Esto vuelve
   const [displayText, setDisplayText] = useState('');
 
   const fullText = 'Bienvenido a Nexora';
@@ -21,7 +24,11 @@ export default function Home() {
   }, []);
 
   const handleStart = () => {
-    router.push('/login');
+    if (user) {
+      router.push('/dashboard');   // 👉 Si está logueado va al dashboard
+    } else {
+      router.push('/login');       // 👉 Si no, va al login
+    }
   };
 
   return (
@@ -54,7 +61,7 @@ export default function Home() {
               whileHover={{ scale: 1.1, backgroundColor: '#2563eb', color: '#fff' }}
               whileTap={{ scale: 0.95 }}
             >
-              Empezar ahora
+              {loading ? 'Cargando...' : 'Empezar ahora'}
             </motion.button>
           </main>
         </div>
