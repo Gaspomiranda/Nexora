@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/router';
 
 export default function Home() {
   const router = useRouter();
@@ -58,39 +58,6 @@ export default function Home() {
               Empezar ahora
             </motion.button>
           </main>
-
-          <motion.section
-            style={styles.features}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-          >
-            <div style={styles.featureItem}>
-              <span style={styles.featureIcon}>💬</span>
-              <p>IA que<br />responde tus dudas</p>
-            </div>
-            <div style={styles.featureItem}>
-              <span style={styles.featureIcon}>🛍️</span>
-              <p>Tienda</p>
-            </div>
-            <div style={styles.featureItem}>
-              <span style={styles.featureIcon}>📚</span>
-              <p>Biblioteca</p>
-            </div>
-            <div style={styles.featureItem}>
-              <span style={styles.featureIcon}>📊</span>
-              <p>Plantillas<br />Inteligentes</p>
-            </div>
-          </motion.section>
-
-          <footer style={styles.footer}>
-            <p style={styles.footerText}>&copy; 2025 EduWealth. Todos los derechos reservados.</p>
-            <div style={styles.footerLinksContainer}>
-              <Link href="/privacy" style={styles.footerLink}>Política de privacidad</Link>
-              <span style={styles.footerDivider}>|</span>
-              <Link href="/terms" style={styles.footerLink}>Términos de uso</Link>
-            </div>
-          </footer>
         </div>
       </div>
     </>
@@ -124,11 +91,6 @@ const styles = {
     fontWeight: 'bold',
     marginBottom: '1rem',
   },
-  subtitle: {
-    fontSize: '1.25rem',
-    marginBottom: '2rem',
-    color: '#cbd5e1',
-  },
   ctaButton: {
     backgroundColor: '#1e293b',
     color: '#fff',
@@ -138,46 +100,5 @@ const styles = {
     fontSize: '1rem',
     cursor: 'pointer',
     transition: 'all 0.3s ease',
-  },
-  features: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    marginTop: '4rem',
-    gap: '3rem',
-    textAlign: 'center',
-  },
-  featureItem: {
-    textAlign: 'center',
-    minWidth: '100px',
-  },
-  featureIcon: {
-    fontSize: '2.5rem',
-    display: 'block',
-    marginBottom: '0.75rem',
-  },
-  footer: {
-    marginTop: '4rem',
-    padding: '2rem 0',
-    fontSize: '0.85rem',
-    color: '#cbd5e1',
-    textAlign: 'center',
-  },
-  footerText: {
-    marginBottom: '0.5rem',
-  },
-  footerLinksContainer: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    gap: '0.5rem',
-  },
-  footerLink: {
-    color: '#cbd5e1',
-    textDecoration: 'underline',
-    fontWeight: 500,
-  },
-  footerDivider: {
-    color: '#cbd5e1',
   },
 };
