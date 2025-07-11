@@ -4,7 +4,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../lib/firebase';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
 
