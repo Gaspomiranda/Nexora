@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // output: 'export',  // ❌ Esto está desactivado o eliminado
+  images: {
+    domains: ['lh3.googleusercontent.com'],   // ✅ Agregado para permitir imágenes de perfil de Google
+  },
 };
 
 module.exports = nextConfig;
