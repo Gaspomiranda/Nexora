@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
