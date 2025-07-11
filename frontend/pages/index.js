@@ -4,11 +4,11 @@ import Navbar from '../components/Navbar';
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../lib/firebase';   // 👉 Este es el import que faltaba
+import { auth } from '../lib/firebase';  // 🔑 Import obligatorio si usamos useAuthState
 
 export default function Home() {
   const router = useRouter();
-  const [user, loading] = useAuthState(auth);  // 👉 Esto vuelve
+  const [user, loading] = useAuthState(auth);
   const [displayText, setDisplayText] = useState('');
 
   const fullText = 'Bienvenido a Nexora';
@@ -23,11 +23,18 @@ export default function Home() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    // Redirección automática al dashboard si ya está logueado
+    if (!loading && user) {
+      router.push('/dashboard');
+    }
+  }, [user, loading, router]);
+
   const handleStart = () => {
     if (user) {
-      router.push('/dashboard');   // 👉 Si está logueado va al dashboard
+      router.push('/dashboard');
     } else {
-      router.push('/login');       // 👉 Si no, va al login
+      router.push('/login');
     }
   };
 
